@@ -1,0 +1,23 @@
+{
+  "name": "@fahrirusliyadi/vuejs-model",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "src/model.js",
+  "repository": "https://github.com/fahrirusliyadi/vuejs-model",
+  "author": {
+    "name": "Fahri Rusliyadi",
+    "email": "fahri.rusliyadi@gmail.com",
+    "url": "https://fahri.my.id"
+  },
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "devDependencies": {
+    "ava": "^3.7.0",
+    "esm": "^3.2.25",
+    "xo": "^0.29.1"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.11"
+  }
+}
