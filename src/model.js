@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import cloneDeep from 'lodash/cloneDeep';
 
 export default class Model {
   /**
@@ -47,6 +48,15 @@ export default class Model {
    */
   $get(key) {
     return this._attributes[key];
+  }
+
+  /**
+   * Convert the model instance to an object.
+   * 
+   @returns {Object}
+   */
+  $toObject() {
+    return cloneDeep(this._attributes);
   }
 
   /**

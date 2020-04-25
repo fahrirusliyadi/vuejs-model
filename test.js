@@ -26,50 +26,56 @@ class TestModel extends Model {
 }
 
 test('constructor', (t) => {
-  const object = new TestModel({ a: 2 });
+  const instance = new TestModel({ a: 2 });
 
-  t.is(object.a, 2);
+  t.is(instance.a, 2);
 });
 
 test('$fill', (t) => {
-  const object = new TestModel();
+  const instance = new TestModel();
 
-  object.$fill({ a: 2, c: 4 });
+  instance.$fill({ a: 2, c: 4 });
 
-  t.is(object.a, 2);
-  t.is(object.c, 8);
+  t.is(instance.a, 2);
+  t.is(instance.c, 8);
 });
 
 test('getter', (t) => {
-  const object = new TestModel();
-  object.b = 4;
+  const instance = new TestModel();
+  instance.b = 4;
 
-  t.is(object.b, 5);
+  t.is(instance.b, 5);
 });
 
 test('setter', (t) => {
-  const object = new TestModel();
-  object.c = 4;
+  const instance = new TestModel();
+  instance.c = 4;
 
-  t.is(object.c, 8);
+  t.is(instance.c, 8);
 });
 
 test('getter without setter', (t) => {
-  const object = new TestModel();
+  const instance = new TestModel();
 
-  t.is(object.d, 4);
+  t.is(instance.d, 4);
   t.throws(
     () => {
-      object.d = 5;
+      instance.d = 5;
     },
     { instanceOf: TypeError }
   );
 });
 
 test('setter without getter', (t) => {
-  const object = new TestModel();
-  object.e = 5;
+  const instance = new TestModel();
+  instance.e = 5;
 
-  t.is(object.$get('e'), 5);
-  t.is(object.e, undefined);
+  t.is(instance.$get('e'), 5);
+  t.is(instance.e, undefined);
+});
+
+test('$toObject', (t) => {
+  const instance = new TestModel({ a: 1 });
+
+  t.deepEqual(instance.$toObject(), { a: 1, b: undefined, c: undefined });
 });
