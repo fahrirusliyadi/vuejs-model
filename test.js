@@ -31,6 +31,12 @@ test('constructor', (t) => {
   t.is(instance.a, 2);
 });
 
+test('enumerable', (t) => {
+  const instance = new TestModel();
+
+  t.deepEqual(Object.keys(instance), instance.$attributes);
+});
+
 test('$fill', (t) => {
   const instance = new TestModel();
 

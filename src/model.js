@@ -52,8 +52,8 @@ export default class Model {
 
   /**
    * Convert the model instance to an object.
-   * 
-   @returns {Object}
+   *
+   * @returns {Object}
    */
   $toObject() {
     return cloneDeep(this._attributes);
@@ -69,6 +69,8 @@ export default class Model {
     }, {});
     this._attributes = Vue.observable(defaults);
 
+    Object.defineProperty(this, '_attributes', { enumerable: false });
+
     for (const key of this.$attributes) {
       const classDescriptor = Object.getOwnPropertyDescriptor(
         Object.getPrototypeOf(this),
@@ -79,6 +81,7 @@ export default class Model {
         set: (value) => {
           this.$set(key, value);
         },
+        enumerable: true,
       };
 
       if (classDescriptor) {
