@@ -1,6 +1,6 @@
 {
   "name": "@fahrirusliyadi/vuejs-model",
-  "description": "Base model class",
+  "description": "Base Vue.js model class with reactive attributes",
   "version": "0.0.0",
   "license": "MIT",
   "main": "src/model.js",

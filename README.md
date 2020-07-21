@@ -1,4 +1,4 @@
-Base model class.
+Base Vue.js model class with reactive attributes.
 
 # Installation
 

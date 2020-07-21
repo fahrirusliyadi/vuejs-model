@@ -25,6 +25,8 @@ class TestModel extends Model {
   }
 }
 
+class TestChildModel extends TestModel {}
+
 test('constructor', (t) => {
   const instance = new TestModel({ a: 2 });
 
@@ -84,4 +86,11 @@ test('$toObject', (t) => {
   const instance = new TestModel({ a: 1 });
 
   t.deepEqual(instance.$toObject(), { a: 1, b: undefined, c: undefined });
+});
+
+test('nested inheritance', (t) => {
+  const instance = new TestChildModel({ b: 2, c: 3 });
+
+  t.is(instance.b, 3);
+  t.is(instance.c, 6);
 });

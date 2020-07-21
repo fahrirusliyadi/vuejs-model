@@ -72,10 +72,7 @@ export default class Model {
     Object.defineProperty(this, '_attributes', { enumerable: false });
 
     for (const key of this.$attributes) {
-      const classDescriptor = Object.getOwnPropertyDescriptor(
-        Object.getPrototypeOf(this),
-        key
-      );
+      const classDescriptor = this._getClassPropertyDescriptor(key);
       const descriptor = {
         get: () => this.$get(key),
         set: (value) => {
@@ -95,6 +92,26 @@ export default class Model {
       }
 
       Object.defineProperty(this, key, descriptor);
+    }
+  }
+
+  /**
+   * Get property descriptor from child class.
+   *
+   * @param {String} name Property name.
+   * @returns {Object}
+   */
+  _getClassPropertyDescriptor(name) {
+    let proto = Object.getPrototypeOf(this);
+
+    while (proto) {
+      const descriptor = Object.getOwnPropertyDescriptor(proto, name);
+
+      if (descriptor) {
+        return descriptor;
+      }
+
+      proto = Object.getPrototypeOf(proto);
     }
   }
 }
