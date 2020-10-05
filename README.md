@@ -58,6 +58,19 @@ Get an attribute value.
 
 - `{String} key` Attribute key.
 
+**Returns**
+
+- `{*}` Attribute value.
+
+## \$set(key, value)
+
+Set an attribute value.
+
+**Arguments**
+
+- `{String} key` Attribute key.
+- `{*} value` Attribute value.
+
 ## \$fill(attributes)
 
 Fill the model with attribute values.
@@ -66,10 +79,10 @@ Fill the model with attribute values.
 
 - `{Object} attributes` Attributes to fill.
 
-## \$toObject()
+## toJSON()
 
-Convert the model instance to an object.
+Return a copy of the model's attributes object.
 
 **Returns**
 
-`{Object}` Attributes.
+- `{Object}` Attributes.

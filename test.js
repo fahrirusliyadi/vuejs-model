@@ -82,10 +82,16 @@ test('setter without getter', (t) => {
   t.is(instance.e, undefined);
 });
 
-test('$toObject', (t) => {
-  const instance = new TestModel({ a: 1 });
+test('toJSON', (t) => {
+  const instanceChild = new TestChildModel({ a: 2 });
+  const instance = new TestModel({ a: 1, e: [instanceChild] });
 
-  t.deepEqual(instance.$toObject(), { a: 1, b: undefined, c: undefined });
+  t.deepEqual(instance.toJSON(), {
+    a: 1,
+    b: undefined,
+    c: undefined,
+    e: [{ a: 2, b: undefined, c: undefined }],
+  });
 });
 
 test('nested inheritance', (t) => {

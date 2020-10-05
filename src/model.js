@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import cloneDeep from 'lodash/cloneDeep';
 
 export default class Model {
   /**
@@ -53,10 +52,39 @@ export default class Model {
   /**
    * Convert the model instance to an object.
    *
+   * @deprecated Use toJSON instead.
    * @returns {Object}
    */
   $toObject() {
-    return cloneDeep(this._attributes);
+    console.warn(`$toObject is deprecated, use toJSON instead.`);
+    return this.toJSON();
+  }
+
+  /**
+   * Return a copy of the model's attributes object.
+   *
+   * @returns {Object}
+   */
+  toJSON() {
+    const clone = (value) => {
+      if (value instanceof Model) {
+        return value.toJSON();
+      }
+
+      if (Array.isArray(value)) {
+        return value.reduce((result, value) => {
+          result.push(clone(value));
+          return result;
+        }, []);
+      }
+
+      return value;
+    };
+
+    return Object.entries(this._attributes).reduce((result, [key, value]) => {
+      result[key] = clone(value);
+      return result;
+    }, {});
   }
 
   /**
